@@ -3,25 +3,23 @@ package br.com.marcondes.challenge.services;
 import br.com.marcondes.challenge.model.Fornecedor;
 import br.com.marcondes.challenge.repositories.FornecedorRepository;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class FornecedorService {
 
-    final FornecedorRepository repository;
-
-    public FornecedorService(FornecedorRepository repository) {
-        this.repository = repository;
-    }
-
+    @Autowired
+    FornecedorRepository repository;
 
     public List<Fornecedor> findAll() {
         return repository.findAll();
     }
 
-    public Fornecedor findById(Long id) {
+    public Fornecedor findById(UUID id) {
         return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id, "Objeto Não Encontrado."));
     }
 
@@ -38,7 +36,7 @@ public class FornecedorService {
         return repository.save(entity);
     }
 
-    public void delete(Long id) {
+    public void delete(UUID id) {
         repository.deleteById(id);
     }
 }

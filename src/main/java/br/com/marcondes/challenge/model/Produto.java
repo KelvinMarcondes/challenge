@@ -11,7 +11,7 @@ import java.util.UUID;
 @Table(name = "produto")
 public class Produto implements Serializable {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Column
     private String nome;

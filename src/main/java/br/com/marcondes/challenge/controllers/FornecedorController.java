@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/fornecedores")
@@ -21,7 +22,7 @@ public class FornecedorController {
     }
 
     @GetMapping("/{id}")
-    public Fornecedor findById(@PathVariable Long id){
+    public Fornecedor findById(@PathVariable UUID id){
         return service.findById(id);
     }
 
@@ -36,7 +37,7 @@ public class FornecedorController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable UUID id){
         service.delete(id);
     }
 }

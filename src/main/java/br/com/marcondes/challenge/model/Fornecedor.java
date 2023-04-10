@@ -3,13 +3,15 @@ package br.com.marcondes.challenge.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @Entity
 @Table(name = "fornecedor")
 public class Fornecedor {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
     @Column(name = "razao_social")
     private String razaoSocial;
     @Column

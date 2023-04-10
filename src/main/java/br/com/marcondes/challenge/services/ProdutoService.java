@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ProdutoService {
 
     @Autowired
-    ProdutoRepository repository;
+     ProdutoRepository repository;
 
     public List<Produto> findAll(){
         return repository.findAll();
