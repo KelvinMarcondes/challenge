@@ -1,13 +1,28 @@
 package br.com.marcondes.challenge.model;
 
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data @AllArgsConstructor @NoArgsConstructor
-public class Funcionario extends Pessoa{
-    private String rg;
+@Data
+@Entity
+@Table(name = "funcionario")
+public class Funcionario{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column
+    private String nome;
+    @Column
+    private String email;
+    @Column
+    private String telefone;
+    @Column
     private String cpf;
-    private Boolean dba;
-
+    @Column
+    private String cidade;
+    @Column(name = "uf")
+    private String UF;
+    @Column
+    private Boolean admin;
 }
