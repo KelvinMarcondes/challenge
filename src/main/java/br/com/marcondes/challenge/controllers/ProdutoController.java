@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/produtos")
@@ -20,7 +21,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
-    public Produto findById(@PathVariable Long id){
+    public Produto findById(@PathVariable UUID id){
         return service.findById(id);
     }
 
@@ -35,7 +36,7 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id){
+    public void deleteById(@PathVariable UUID id){
         service.deleteById(id);
     }
 
