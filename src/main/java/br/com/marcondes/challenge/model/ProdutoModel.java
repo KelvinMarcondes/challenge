@@ -4,15 +4,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Data
 @Entity
 @Table(name = "produto")
-public class Produto implements Serializable {
+public class ProdutoModel implements Serializable {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column
     private String nome;
     @Column

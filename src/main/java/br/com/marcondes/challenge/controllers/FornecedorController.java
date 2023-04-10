@@ -1,8 +1,7 @@
 package br.com.marcondes.challenge.controllers;
 
-import br.com.marcondes.challenge.model.Fornecedor;
+import br.com.marcondes.challenge.model.FornecedorModel;
 import br.com.marcondes.challenge.services.FornecedorService;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,23 +16,23 @@ public class FornecedorController {
     FornecedorService service;
 
     @GetMapping
-    public List<Fornecedor> findAll(){
+    public List<FornecedorModel> findAll(){
         return service.findAll();
     }
 
     @GetMapping("/{id}")
-    public Fornecedor findById(@PathVariable UUID id){
+    public FornecedorModel findById(@PathVariable UUID id){
         return service.findById(id);
     }
 
     @PostMapping
-    public Fornecedor create(@RequestBody Fornecedor fornecedor){
-        return service.create(fornecedor);
+    public FornecedorModel create(@RequestBody FornecedorModel fornecedorModel){
+        return service.create(fornecedorModel);
     }
 
     @PutMapping
-    public Fornecedor update(@RequestBody Fornecedor fornecedor){
-        return service.update(fornecedor);
+    public FornecedorModel update(@RequestBody FornecedorModel fornecedorModel){
+        return service.update(fornecedorModel);
     }
 
     @DeleteMapping("/{id}")

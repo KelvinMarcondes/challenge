@@ -1,42 +1,54 @@
 package br.com.marcondes.challenge.controllers;
 
-import br.com.marcondes.challenge.model.Produto;
+import br.com.marcondes.challenge.dto.ProdutoDto;
+import br.com.marcondes.challenge.model.ProdutoModel;
 import br.com.marcondes.challenge.services.ProdutoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/produtos")
 public class ProdutoController {
 
-    @Autowired
-    ProdutoService service;
+    final ProdutoService service;
+    public ProdutoController(ProdutoService service) {
+        this.service = service;
+    }
 
     @GetMapping
-    public List<Produto> findAll(){
-        return service.findAll();
+    public ResponseEntity<List<ProdutoModel>> findAll(){
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
     }
 
     @GetMapping("/{id}")
-    public Produto findById(@PathVariable UUID id){
-        return service.findById(id);
+    public ResponseEntity<Object> findById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
     }
 
-    @PostMapping
-    public Produto create(@RequestBody Produto produto){
-        return service.create(produto);
+    @PostMapping("/{id}")
+    public ResponseEntity<Object> create(@PathVariable(value = "id") Long id,
+                                         @RequestBody @Valid ProdutoDto produtoDto){
+        var produtoModel = new ProdutoModel();
+        BeanUtils.copyProperties(produtoDto, produtoModel);
+        return ResponseEntity.status(HttpStatus.OK).body(service.create(produtoModel));
     }
 
-    @PutMapping
-    public Produto update(@RequestBody Produto produto){
-        return service.update(produto);
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> update(@PathVariable(value = "id")Long id,
+                                         @RequestBody @Valid ProdutoDto produtoDto){
+        ProdutoModel produtoModel = service.findById(id);
+        BeanUtils.copyProperties(produtoDto, produtoModel);
+        return ResponseEntity.status(HttpStatus.OK).body(service.create(produtoModel));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable UUID id){
+    public void deleteById(@PathVariable Long id){
         service.deleteById(id);
     }
 

@@ -1,6 +1,6 @@
 package br.com.marcondes.challenge.services;
 
-import br.com.marcondes.challenge.model.Fornecedor;
+import br.com.marcondes.challenge.model.FornecedorModel;
 import br.com.marcondes.challenge.repositories.FornecedorRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +15,24 @@ public class FornecedorService {
     @Autowired
     FornecedorRepository repository;
 
-    public List<Fornecedor> findAll() {
+    public List<FornecedorModel> findAll() {
         return repository.findAll();
     }
 
-    public Fornecedor findById(UUID id) {
+    public FornecedorModel findById(UUID id) {
         return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id, "Objeto Não Encontrado."));
     }
 
-    public Fornecedor create(Fornecedor fornecedor) {
-        return repository.save(fornecedor);
+    public FornecedorModel create(FornecedorModel fornecedorModel) {
+        return repository.save(fornecedorModel);
     }
 
-    public Fornecedor update(Fornecedor fornecedor) {
-        var entity = findById(fornecedor.getId());
-        entity.setRazaoSocial(fornecedor.getRazaoSocial());
-        entity.setCnpj(fornecedor.getCnpj());
-        entity.setEmail(fornecedor.getEmail());
-        entity.setTelefone(fornecedor.getTelefone());
+    public FornecedorModel update(FornecedorModel fornecedorModel) {
+        var entity = findById(fornecedorModel.getId());
+        entity.setRazaoSocial(fornecedorModel.getRazaoSocial());
+        entity.setCnpj(fornecedorModel.getCnpj());
+        entity.setEmail(fornecedorModel.getEmail());
+        entity.setTelefone(fornecedorModel.getTelefone());
         return repository.save(entity);
     }
 
