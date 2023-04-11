@@ -24,7 +24,7 @@ public class ProdutoService {
         return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id, "Objeto não encontrado"));
     }
 
-    public ProdutoModel create(ProdutoModel produtoModel) {
+    public ProdutoModel save(ProdutoModel produtoModel) {
         return repository.save(produtoModel);
     }
 

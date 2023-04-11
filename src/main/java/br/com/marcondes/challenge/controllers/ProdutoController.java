@@ -32,11 +32,11 @@ public class ProdutoController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<Object> create(@PathVariable(value = "id") Long id,
+    public ResponseEntity<Object> save(@PathVariable(value = "id") Long id,
                                          @RequestBody @Valid ProdutoDto produtoDto){
         var produtoModel = new ProdutoModel();
         BeanUtils.copyProperties(produtoDto, produtoModel);
-        return ResponseEntity.status(HttpStatus.OK).body(service.create(produtoModel));
+        return ResponseEntity.status(HttpStatus.OK).body(service.save(produtoModel));
     }
 
     @PutMapping("/{id}")
@@ -44,7 +44,7 @@ public class ProdutoController {
                                          @RequestBody @Valid ProdutoDto produtoDto){
         ProdutoModel produtoModel = service.findById(id);
         BeanUtils.copyProperties(produtoDto, produtoModel);
-        return ResponseEntity.status(HttpStatus.OK).body(service.create(produtoModel));
+        return ResponseEntity.status(HttpStatus.OK).body(service.save(produtoModel));
     }
 
     @DeleteMapping("/{id}")
