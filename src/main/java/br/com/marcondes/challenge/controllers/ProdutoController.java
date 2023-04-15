@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/produtos")
@@ -31,9 +30,8 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<Object> save(@PathVariable(value = "id") Long id,
-                                         @RequestBody @Valid ProdutoDto produtoDto){
+    @PostMapping
+    public ResponseEntity<Object> save(@RequestBody @Valid ProdutoDto produtoDto){
         var produtoModel = new ProdutoModel();
         BeanUtils.copyProperties(produtoDto, produtoModel);
         return ResponseEntity.status(HttpStatus.OK).body(service.save(produtoModel));

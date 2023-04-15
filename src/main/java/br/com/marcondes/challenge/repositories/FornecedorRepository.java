@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface FornecedorRepository extends JpaRepository<FornecedorModel, UUID> {
+public interface FornecedorRepository extends JpaRepository<FornecedorModel, Long> {
 
+    boolean existsByEmail(String email);
+    boolean existsByTelefone(String telefone);
+    boolean existsByCnpj(String cnpj);
+    boolean existsByRazaoSocial(String razaoSocial);
 }

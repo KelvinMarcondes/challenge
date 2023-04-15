@@ -1,5 +1,6 @@
 package br.com.marcondes.challenge.model;
 
+import br.com.marcondes.challenge.model.enums.EstoqueDisponivel;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,16 +11,20 @@ import java.io.Serializable;
 @Table(name = "produtos")
 public class ProdutoModel implements Serializable {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+
+    @Column(nullable = false)
     private String nome;
-    @Column
+
+    @Column(nullable = false)
     private Double preco;
-    @Column
-    private String fornecedor;
-    @Column
+
+    @Column(nullable = false)
     private Integer quantidade;
-    @Column(name = "quantidade_reservada")
-    private Integer quantidadeReservada;
+
+    @Column(nullable = false)
+    private EstoqueDisponivel estoqueDisponivel;
+
 }

@@ -1,20 +1,18 @@
 package br.com.marcondes.challenge.dto;
 
+import br.com.marcondes.challenge.model.enums.EstoqueDisponivel;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class ProdutoDto {
-    @NotBlank @NotEmpty
+    @NotNull
     private String nome;
-    @NotBlank @NotEmpty
+    @NotNull
     private Double preco;
-    @NotBlank @NotEmpty
-    private String fornecedor;
-    @NotBlank @NotEmpty
+    @NotNull
     private Integer quantidade;
-    @NotBlank @NotEmpty
-    private Integer quantidadeReservada;
+    @NotNull
+    private EstoqueDisponivel estoqueDisponivel;
 }
