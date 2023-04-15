@@ -5,22 +5,31 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "cliente")
+@Table(name = "clientes")
 public class ClienteModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String nome;
+
     @Column
+    private String sobreNome;
+
+    @Column(unique = true)
     private String email;
-    @Column
+
+    @Column(unique = true)
     private String telefone;
-    @Column
-    private String cpf_cnpj;
+
+    @Column(unique = true)
+    private String cpf;
+
     @Column
     private String cidade;
-    @Column(name = "uf")
+
+    @Column
     private String UF;
 }

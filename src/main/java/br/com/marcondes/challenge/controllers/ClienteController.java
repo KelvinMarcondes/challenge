@@ -9,13 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 
 @Data
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("/clientes")
 public class ClienteController {
 
     final ClienteService service;
@@ -34,25 +35,34 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<Object> save(@PathVariable(value = "id")Long id,
-                                         @RequestBody ClienteDto clienteDto){
+    @PostMapping
+    public ResponseEntity<Object> saveCliente(@RequestBody @Valid ClienteDto clienteDto){
+        if (service.existsByCpf(clienteDto.getCpf())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("CPF já utilizado");
+        }
+        if (service.existsByTelefone(clienteDto.getTelefone())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Telefone já utilizado.");
+        }
+        if (service.existsByEmail(clienteDto.getEmail())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email já utilizado.");
+        }
         var clienteModel = new ClienteModel();
         BeanUtils.copyProperties(clienteDto, clienteModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(clienteModel));
-
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.saveCliente(clienteModel));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> update(@PathVariable(value = "id")Long id,
-                                       @RequestBody ClienteDto clienteDto){
-        Optional<ClienteModel> clienteModelOptional = Optional.ofNullable(service.findById(id));;
+    public ResponseEntity<Object> updateCliente(@PathVariable(value = "id")Long id,
+                                                @RequestBody @Valid ClienteDto clienteDto){
+        Optional<ClienteModel> clienteModelOptional = Optional.ofNullable(service.findById(id));
+
         if (clienteModelOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não encontrado.");
         }
         var clienteModel = new ClienteModel();
         BeanUtils.copyProperties(clienteDto, clienteModel);
-        return ResponseEntity.status(HttpStatus.OK).body(service.save(clienteModel));
+        clienteModel.setId(clienteModelOptional.get().getId());
+        return ResponseEntity.status(HttpStatus.OK).body(service.saveCliente(clienteModel));
     }
 
     @DeleteMapping("/{id}")
@@ -65,9 +75,5 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.OK).body("Cliente deletado.");
 
     }
-
-
-
-
 
 }
