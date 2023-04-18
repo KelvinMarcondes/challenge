@@ -27,4 +27,5 @@ public class ProdutoModel implements Serializable {
     @Column(nullable = false)
     private EstoqueDisponivel estoqueDisponivel;
 
+
 }

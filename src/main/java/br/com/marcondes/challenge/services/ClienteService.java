@@ -33,7 +33,6 @@ public class ClienteService {
 
     public void delete(ClienteModel clienteModel) {
         repository.delete(clienteModel);
-
     }
 
 

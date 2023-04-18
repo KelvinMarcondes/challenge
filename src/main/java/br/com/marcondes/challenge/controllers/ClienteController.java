@@ -72,7 +72,7 @@ public class ClienteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não encontrado.");
         }
         service.delete(clienteModelOptional.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Cliente deletado.");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Cliente deletado.");
 
     }
 

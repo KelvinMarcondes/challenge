@@ -16,8 +16,11 @@ import java.util.Optional;
 @RequestMapping("/fornecedores")
 public class FornecedorController {
 
-    @Autowired
-    FornecedorService service;
+    final FornecedorService service;
+
+    public FornecedorController(FornecedorService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity <List<FornecedorModel>>findAll(){
@@ -46,11 +49,11 @@ public class FornecedorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> update(   @PathVariable(value = "id")Long id,
-                                            @RequestBody  FornecedorDto fornecedorDto){
+    public ResponseEntity<Object> update(@PathVariable(value = "id")Long id,
+                                         @RequestBody  FornecedorDto fornecedorDto){
         Optional<FornecedorModel> fornecedorModelOptional = Optional.ofNullable(service.findById(id));
         if (fornecedorModelOptional.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não encontrado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fornecedor não encontrado.");
         }
         var fornecedorModel = new FornecedorModel();
         BeanUtils.copyProperties(fornecedorDto, fornecedorModel);

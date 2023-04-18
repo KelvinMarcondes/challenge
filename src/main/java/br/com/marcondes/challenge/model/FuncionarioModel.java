@@ -11,18 +11,23 @@ public class FuncionarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String nome;
-    @Column
+
+    @Column(unique = true)
     private String email;
-    @Column
+
+    @Column(unique = true)
     private String telefone;
-    @Column
+
+    @Column(unique = true)
     private String cpf;
+
     @Column
     private String cidade;
-    @Column(name = "uf")
-    private String UF;
+
     @Column
-    private Boolean admin;
+    private String UF;
+
 }

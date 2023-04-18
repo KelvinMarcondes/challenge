@@ -1,5 +1,6 @@
 package br.com.marcondes.challenge.dto;
 
+import br.com.marcondes.challenge.model.FuncionarioModel;
 import br.com.marcondes.challenge.model.enums.EstoqueDisponivel;
 import lombok.Data;
 
@@ -15,4 +16,5 @@ public class ProdutoDto {
     private Integer quantidade;
     @NotNull
     private EstoqueDisponivel estoqueDisponivel;
+
 }

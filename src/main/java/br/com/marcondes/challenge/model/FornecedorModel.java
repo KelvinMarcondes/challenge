@@ -29,6 +29,7 @@ public class FornecedorModel {
 
     @Column(unique = true)
     private String telefone;
+
 }
 
 
